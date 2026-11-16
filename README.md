@@ -33,7 +33,6 @@ Copie o `.env.example` para `.env.local` e preencha:
 | `ADMIN_EMAIL` | e-mail da conta ADM |
 | `ADMIN_SENHA` | senha da conta ADM |
 
-O `.env.local` não vai para o GitHub. Sem ele, a API usa valores padrão só para testes
 (ADM `admin@queenbfans.com` / `admin123`).
 
 ### Conta ADM
