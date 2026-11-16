@@ -1,0 +1,11 @@
+COMO COLOCAR AS FOTOS DAS TURNÊS
+
+1. Cada turnê tem uma pasta aqui dentro (ex.: renaissance-world-tour).
+2. Salve as fotos na pasta da turnê (.jpg, .png ou .webp).
+3. A foto chamada "capa" (ex.: capa.jpg) vira o pôster do card.
+   Se não tiver nenhuma "capa", o site usa a primeira foto (ordem alfabética).
+4. As outras fotos aparecem na galeria da página da turnê.
+
+FOTO DO "SOBRE ELA"
+Salve uma foto como public/sobre.jpg (ou .png/.webp).
+Se não tiver, o site usa a foto da Beyoncé que vem do Deezer.

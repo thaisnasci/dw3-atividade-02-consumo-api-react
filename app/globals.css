@@ -1,0 +1,435 @@
+/* =========================================================
+   Base
+   ========================================================= */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: #050505; }
+body { font-family: var(--f-inter), system-ui, sans-serif; line-height: 1.6; color: #eee; }
+a { color: inherit; }
+img { display: block; max-width: 100%; }
+.container { max-width: 1160px; margin: 0 auto; padding: 0 16px; }
+
+/* =========================================================
+   Temas: cada álbum troca estas variáveis
+   ========================================================= */
+[data-tema] {
+  --bg: #050505;
+  --fundo: none;
+  --texto: #f2f2f2;
+  --suave: #9a9aa5;
+  --destaque: #d9d9e3;
+  --sobre-destaque: #050505;
+  --painel: rgba(255,255,255,.05);
+  --borda: rgba(255,255,255,.14);
+  --fonte: var(--f-unbounded);
+  --peso: 800;
+  --estilo: normal;
+  --caixa: uppercase;
+  --espaco: .02em;
+  --titulo: linear-gradient(180deg, #ffffff 0%, #9b9ba8 45%, #f4f4f8 52%, #6d6d78 70%, #e9e9f0 100%);
+}
+
+/* QUEENBFANS: identidade do site (início, turnês, ranking) — preto e dourado-mel */
+[data-tema="queenb"] {
+  --bg: #0b0805; --texto: #f8efdc; --suave: #b9a27a;
+  --destaque: #f2bd3d; --sobre-destaque: #1a1206;
+  --painel: rgba(242,189,61,.06); --borda: rgba(242,189,61,.2);
+  --fonte: var(--f-cinzel); --peso: 800; --caixa: uppercase; --espaco: .04em;
+  --titulo: linear-gradient(180deg, #fff1c4 0%, #f6c94c 40%, #c98a12 72%, #ffe28a 100%);
+  --fundo: radial-gradient(ellipse at 50% -10%, rgba(242,189,61,.22), transparent 55%),
+           radial-gradient(circle at 90% 70%, rgba(201,138,18,.10), transparent 40%);
+}
+
+/* RENAISSANCE: prata cromado, disco, bola espelhada */
+[data-tema="renaissance"] {
+  --fundo: radial-gradient(ellipse at 50% -10%, rgba(200,210,255,.18), transparent 55%),
+           radial-gradient(circle at 85% 30%, rgba(255,180,240,.08), transparent 35%),
+           radial-gradient(circle at 10% 60%, rgba(140,220,255,.07), transparent 35%);
+}
+
+/* COWBOY CARTER: faroeste à noite — couro escuro, vermelho e creme */
+[data-tema="cowboy"] {
+  --bg: #0e0907; --texto: #f1e4cc; --suave: #a88d72;
+  --destaque: #c8283a; --sobre-destaque: #f7ecd8;
+  --painel: rgba(241,228,204,.05); --borda: rgba(241,228,204,.14);
+  --fonte: var(--f-rye); --peso: 400; --caixa: uppercase; --espaco: .03em;
+  --titulo: linear-gradient(180deg, #f7ecd8 0%, #e2cfa9 55%, #b8946a 100%);
+  --fundo: radial-gradient(ellipse at 50% -10%, rgba(200,40,58,.22), transparent 55%),
+           radial-gradient(circle at 10% 90%, rgba(31,58,104,.25), transparent 45%),
+           repeating-linear-gradient(90deg, rgba(241,228,204,.025) 0 1px, transparent 1px 90px);
+}
+
+/* LEMONADE: amarelo limão, preto e branco */
+[data-tema="lemonade"] {
+  --bg: #0f0f0f; --texto: #f4efe2; --suave: #a59f8c;
+  --destaque: #f5cf3a; --sobre-destaque: #0f0f0f;
+  --fonte: var(--f-playfair); --peso: 700; --estilo: italic; --caixa: none; --espaco: 0;
+  --titulo: linear-gradient(180deg, #f8dd6a, #e8b923);
+  --fundo: radial-gradient(circle at 80% 10%, rgba(245,207,58,.18), transparent 40%);
+}
+
+/* BEYONCÉ (2013): preto com rosa */
+[data-tema="beyonce"] {
+  --bg: #000; --texto: #fff; --suave: #a0a0a0;
+  --destaque: #ff5fa2; --sobre-destaque: #000;
+  --titulo: linear-gradient(180deg, #ff8cc0, #ff3d8f);
+  --espaco: .08em; --peso: 500;
+}
+
+/* 4: tons quentes, dourado e marrom */
+[data-tema="quatro"] {
+  --bg: #241811; --texto: #f6e8d3; --suave: #b39b7e;
+  --destaque: #d8a25a; --sobre-destaque: #241811;
+  --fonte: var(--f-playfair); --peso: 700; --caixa: none; --espaco: 0;
+  --titulo: linear-gradient(180deg, #f3cf8f, #b8813c);
+  --fundo: radial-gradient(circle at 30% 0%, rgba(216,162,90,.2), transparent 55%);
+}
+
+/* I AM... SASHA FIERCE: preto e branco, dois lados */
+[data-tema="sasha"] {
+  --bg: #0b0b0b; --texto: #fafafa; --suave: #9b9b9b;
+  --destaque: #fafafa; --sobre-destaque: #0b0b0b;
+  --fonte: var(--f-playfair); --peso: 700; --caixa: uppercase; --espaco: .06em;
+  --titulo: linear-gradient(90deg, #fff 50%, #8a8a8a 50%);
+  --fundo: linear-gradient(115deg, transparent 62%, rgba(255,255,255,.06) 62%);
+}
+
+/* B-DAY: bronze e dourado */
+[data-tema="bday"] {
+  --bg: #2c1b0e; --texto: #fbecd6; --suave: #c09a73;
+  --destaque: #e7a650; --sobre-destaque: #2c1b0e;
+  --fonte: var(--f-playfair); --peso: 700; --caixa: none; --espaco: 0;
+  --titulo: linear-gradient(180deg, #ffd796, #c97a2b);
+  --fundo: radial-gradient(circle at 70% 0%, rgba(231,166,80,.22), transparent 55%);
+}
+
+/* DANGEROUSLY IN LOVE: brilho, champanhe */
+[data-tema="dangerously"] {
+  --bg: #17110d; --texto: #f7eadc; --suave: #b49d88;
+  --destaque: #ead2b5; --sobre-destaque: #17110d;
+  --fonte: var(--f-playfair); --peso: 400; --estilo: italic; --caixa: none; --espaco: 0;
+  --titulo: linear-gradient(180deg, #fff3e2, #c8a882);
+  --fundo: radial-gradient(rgba(255,240,220,.12) 1px, transparent 1px) 0 0 / 22px 22px;
+}
+
+/* THE LION KING: THE GIFT: pôr do sol laranja e dourado */
+[data-tema="leao"] {
+  --bg: #2a1206; --texto: #fff0dc; --suave: #d3a678;
+  --destaque: #f39a2c; --sobre-destaque: #2a1206;
+  --fonte: var(--f-playfair); --peso: 700; --caixa: uppercase; --espaco: .04em;
+  --titulo: linear-gradient(180deg, #ffd56a, #f0761f);
+  --fundo: radial-gradient(ellipse at 50% 110%, rgba(243,154,44,.35), transparent 60%);
+}
+
+/* HOMECOMING: amarelo e rosa */
+[data-tema="homecoming"] {
+  --bg: #f4cf2f; --texto: #1b1408; --suave: #6b5714;
+  --destaque: #d8257c; --sobre-destaque: #fff;
+  --painel: rgba(255,255,255,.35); --borda: rgba(27,20,8,.2);
+  --titulo: linear-gradient(180deg, #1b1408, #1b1408);
+  --fundo: repeating-linear-gradient(-45deg, rgba(216,37,124,.06) 0 14px, transparent 14px 28px);
+}
+
+/* =========================================================
+   Página
+   ========================================================= */
+.pagina {
+  position: relative; min-height: 100vh; padding: 40px 0 24px; overflow: hidden;
+  background: var(--fundo), var(--bg); color: var(--texto);
+}
+.pagina > * { position: relative; }
+
+.sobretitulo {
+  display: inline-block; font-size: .72rem; font-weight: 600; letter-spacing: .3em;
+  text-transform: uppercase; color: var(--suave);
+}
+
+.cromado, .album-titulo {
+  font-family: var(--fonte); font-weight: var(--peso); font-style: var(--estilo);
+  text-transform: var(--caixa); letter-spacing: var(--espaco); line-height: 1;
+  background: var(--titulo); -webkit-background-clip: text; background-clip: text; color: transparent;
+  /* O degradê só pinta dentro da caixa: sem esse espaço, acentos em maiúsculas (Ê, É, Á) ficam cortados */
+  padding-top: .2em;
+}
+
+.secao-titulo {
+  font-family: var(--fonte); font-weight: var(--peso); font-style: var(--estilo);
+  text-transform: var(--caixa); font-size: 1.4rem; margin: 48px 0 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.secao-titulo span {
+  font-family: var(--f-inter); font-size: .8rem; font-style: normal; padding: 2px 10px;
+  border-radius: 999px; background: var(--destaque); color: var(--sobre-destaque);
+}
+
+/* Favo de mel (página inicial) */
+.favo {
+  position: absolute !important; top: 0; right: 0; width: min(720px, 90vw); height: 760px; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23f2bd3d' stroke-width='1.2'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23f2bd3d' stroke-width='1.2'/%3E%3C/svg%3E");
+  opacity: .16; -webkit-mask-image: radial-gradient(circle at 80% 30%, #000 0%, transparent 65%); mask-image: radial-gradient(circle at 80% 30%, #000 0%, transparent 65%);
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(5,5,5,.72); backdrop-filter: blur(14px) saturate(1.4);
+  border-bottom: 1px solid rgba(242,189,61,.18);
+}
+.navbar-dentro { max-width: 1160px; margin: 0 auto; padding: 0 16px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+.logo {
+  font-family: var(--f-cinzel); font-weight: 800; letter-spacing: .04em; text-decoration: none; font-size: 1.25rem;
+  background: linear-gradient(180deg, #fff1c4, #f2bd3d 55%, #c98a12); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.logo span { font-size: 1.45em; }
+.navbar ul { list-style: none; display: flex; gap: 4px; }
+.navbar ul a {
+  display: block; padding: 8px 16px; border-radius: 999px; text-decoration: none; color: #c9c9d2;
+  font-size: .9rem; font-weight: 500; transition: background .2s, color .2s;
+}
+.navbar ul a:hover { color: #fff; background: rgba(255,255,255,.08); }
+.navbar ul a.ativo { color: #1a1206; background: linear-gradient(180deg, #ffe28a, #f2bd3d); }
+.menu-botao { display: none; background: none; border: 0; color: #fff; font-size: 1.4rem; cursor: pointer; padding: 6px 10px; }
+
+/* ---------- Abertura (landing) ---------- */
+.abertura { min-height: calc(100vh - 140px); display: flex; flex-direction: column; justify-content: center; padding-top: 24px; padding-bottom: 40px; }
+.abertura h1 { font-size: clamp(3.4rem, 15vw, 11rem); margin: 12px 0 18px; filter: drop-shadow(0 4px 40px rgba(220,225,255,.25)); }
+.abertura-frase { font-size: clamp(1.05rem, 2vw, 1.35rem); color: #cfcfd8; max-width: 560px; }
+.abertura-botoes { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0 48px; }
+.botao.botao-vazado { background: transparent; color: var(--texto); border: 1px solid var(--borda); }
+.botao.botao-vazado:hover { border-color: var(--destaque); }
+.numeros { display: flex; flex-wrap: wrap; gap: 40px; padding-top: 28px; border-top: 1px solid var(--borda); max-width: 640px; }
+.numeros dt { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--suave); }
+.numeros dd { font-family: var(--fonte); color: var(--destaque); font-weight: 800; font-size: 2rem; }
+
+/* ---------- Sobre ---------- */
+.sobre { display: grid; grid-template-columns: 380px 1fr; gap: 56px; align-items: start; padding-top: 40px; scroll-margin-top: 64px; }
+.sobre .secao-titulo { margin-top: 0; }
+.sobre p { color: #d6d6de; margin-bottom: 14px; }
+.sobre-foto {
+  border-radius: 999px 999px 24px 24px; overflow: hidden; aspect-ratio: 3 / 4; position: sticky; top: 96px;
+  border: 1px solid var(--borda); box-shadow: 0 0 0 8px rgba(255,255,255,.04), 0 30px 80px rgba(0,0,0,.6);
+}
+.sobre-foto img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: grayscale(.3) contrast(1.05); }
+#albuns { scroll-margin-top: 64px; padding-top: 24px; }
+.link-suave { display: inline-block; margin-top: 12px; color: var(--destaque); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--borda); }
+.link-suave:hover { border-color: var(--destaque); }
+
+/* ---------- Chamadas (top 5 e turnês) ---------- */
+.chamadas { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; margin-top: 56px; }
+.chamada { padding: 28px; border-radius: 20px; background: var(--painel); border: 1px solid var(--borda); }
+.chamada .secao-titulo { margin-top: 0; }
+.chamada p { color: #cfcfd8; margin-bottom: 20px; }
+.top-mini { list-style: none; display: grid; gap: 10px; margin-bottom: 8px; }
+.top-mini li { display: grid; grid-template-columns: 28px 44px 1fr; gap: 12px; align-items: center; }
+.top-mini .pos { font-family: var(--fonte); color: var(--destaque); font-weight: 800; color: var(--suave); }
+.top-mini img { width: 44px; height: 44px; border-radius: 6px; }
+.top-mini strong { display: block; font-weight: 600; line-height: 1.2; }
+.top-mini small { color: var(--suave); }
+
+/* ---------- Páginas internas ---------- */
+.titulo-pagina { font-size: clamp(2.8rem, 10vw, 6.5rem); margin: 8px 0 20px; }
+.intro { color: var(--suave); max-width: 640px; margin-bottom: 28px; }
+.bloco-separado { margin-top: 72px; }
+.album-info .intro { color: var(--texto); opacity: .85; margin-bottom: 12px; }
+
+.grade-turnes { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); margin-top: 24px; }
+.card-turne .card-capa { aspect-ratio: 3 / 4; display: grid; place-items: center; background: var(--painel); }
+.card-info h3 { overflow-wrap: anywhere; }
+.card-turne .card-info p { font-size: .85rem; color: var(--suave); margin-top: 8px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.sem-foto { font-family: var(--fonte); font-size: 2.4rem; color: var(--suave); }
+.turne-capa:has(.sem-foto) { aspect-ratio: 3 / 4; display: grid; place-items: center; background: var(--painel); border: 1px solid var(--borda); }
+
+.galeria { list-style: none; columns: 3 240px; column-gap: 14px; }
+.galeria li { break-inside: avoid; margin-bottom: 14px; }
+.galeria img { width: 100%; border-radius: 12px; transition: transform .3s, box-shadow .3s; }
+.galeria a:hover img { transform: scale(1.02); box-shadow: 0 16px 40px rgba(0,0,0,.5); }
+.texto-longo { max-width: 760px; }
+.texto-longo p { margin-bottom: 14px; }
+
+/* ---------- Grade de álbuns ---------- */
+.grade { list-style: none; display: grid; gap: 24px; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+.card {
+  display: block; height: 100%; text-decoration: none; border-radius: 16px; overflow: hidden;
+  background: var(--bg); color: var(--texto); border: 1px solid var(--borda);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.card:hover, .card:focus-visible { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,.5), 0 0 0 2px var(--destaque); outline: none; }
+.card-capa { aspect-ratio: 1; overflow: hidden; }
+.card-capa img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.card:hover .card-capa img { transform: scale(1.05); }
+.card-info { padding: 14px 16px 18px; background: var(--fundo), var(--bg); }
+.card-info h3 {
+  font-family: var(--fonte); font-weight: var(--peso); font-style: var(--estilo); text-transform: var(--caixa);
+  font-size: 1rem; line-height: 1.2; letter-spacing: var(--espaco);
+}
+.card-info span { font-size: .8rem; color: var(--destaque); font-weight: 600; }
+
+/* =========================================================
+   Página do álbum
+   ========================================================= */
+.fundo-capa {
+  position: absolute !important; inset: -60px; background-size: cover; background-position: center;
+  filter: blur(70px) saturate(1.3); opacity: .28; transform: scale(1.1);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 70%);
+}
+[data-tema="homecoming"] .fundo-capa { opacity: .18; }
+
+.voltar {
+  display: inline-block; margin-bottom: 32px; padding: 10px 20px; border-radius: 999px;
+  border: 1px solid var(--borda); background: var(--painel); backdrop-filter: blur(8px);
+  text-decoration: none; font-weight: 600; font-size: .9rem; transition: background .2s, color .2s;
+}
+.voltar:hover { background: var(--destaque); color: var(--sobre-destaque); }
+
+.album-topo { display: grid; grid-template-columns: minmax(240px, 400px) 1fr; gap: 48px; align-items: end; }
+.album-capa { border-radius: 12px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.55); }
+.album-capa img { width: 100%; height: auto; }
+/* pôster de turnê: sempre em pé (3:4), preenchendo a moldura inteira */
+.turne-capa img { aspect-ratio: 3 / 4; height: auto; object-fit: cover; object-position: top center; }
+.album-topo:has(.turne-capa) { grid-template-columns: minmax(220px, 340px) 1fr; align-items: center; }
+.album-titulo { font-size: clamp(1.8rem, 4.2vw, 4rem); margin: 10px 0 6px; overflow-wrap: break-word; hyphens: none; }
+.artista { font-size: 1.1rem; color: var(--suave); margin-bottom: 24px; }
+
+.dados { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-bottom: 28px; }
+.dados div { padding: 12px 14px; border-radius: 12px; background: var(--painel); border: 1px solid var(--borda); }
+.dados dt { font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; color: var(--suave); }
+.dados dd { font-weight: 600; overflow-wrap: anywhere; }
+
+.botao {
+  display: inline-block; padding: 14px 28px; border-radius: 999px; text-decoration: none; font-weight: 700;
+  background: var(--destaque); color: var(--sobre-destaque); transition: transform .2s, box-shadow .2s;
+}
+.botao:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+
+/* ---------- Faixas ---------- */
+.faixas { list-style: none; border-top: 1px solid var(--borda); }
+.faixas li {
+  display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 12px;
+  padding: 10px 8px; border-bottom: 1px solid var(--borda); border-radius: 8px; transition: background .15s;
+}
+.faixas li:hover, .faixas li.tocando { background: var(--painel); }
+.faixas li.tocando .faixa-nome { color: var(--destaque); }
+.play {
+  width: 36px; height: 36px; border-radius: 50%; border: 0; cursor: pointer; font: inherit; font-size: .85rem;
+  background: transparent; color: var(--suave);
+}
+.faixas li:hover .play:not(:disabled), .faixas li.tocando .play { background: var(--destaque); color: var(--sobre-destaque); }
+.faixas li:hover .play:not(:disabled) .num { font-size: 0; }
+.faixas li:hover .play:not(:disabled) .num::after { content: "▶"; font-size: .8rem; }
+.play:disabled { cursor: default; }
+.faixa-nome { text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+.faixa-nome:hover { text-decoration: underline; }
+.e { font-size: .6rem; font-weight: 800; padding: 1px 5px; border-radius: 3px; background: var(--suave); color: var(--bg); }
+.faixa-tempo { color: var(--suave); font-variant-numeric: tabular-nums; font-size: .9rem; }
+.dica { margin-top: 14px; font-size: .8rem; color: var(--suave); }
+
+/* ---------- Ranking ---------- */
+.faixa-meio { min-width: 0; }
+.faixas-ranking li { grid-template-columns: 44px 52px 1fr auto; }
+.mini-capa { width: 52px; height: 52px; border-radius: 6px; }
+.faixa-album { display: block; font-size: .8rem; color: var(--suave); text-decoration: none; }
+.faixa-album:hover { color: var(--destaque); text-decoration: underline; }
+.barra { display: block; height: 3px; margin-top: 6px; border-radius: 3px; background: var(--borda); max-width: 320px; position: relative; overflow: hidden; }
+.barra::after { content: ""; position: absolute; inset: 0; width: var(--p); background: linear-gradient(90deg, color-mix(in srgb, var(--destaque) 45%, transparent), var(--destaque)); border-radius: 3px; }
+.podio .num { font-family: var(--fonte); font-weight: 800; font-size: 1.1rem; }
+.podio-1 .num { color: #ffd76a; }
+.podio-2 .num { color: #e4e4ee; }
+.podio-3 .num { color: #e0a070; }
+.podio .faixa-nome { font-size: 1.05rem; font-weight: 700; }
+
+.carregando { text-align: center; padding: 120px 16px; color: #9a9aa5; letter-spacing: .2em; text-transform: uppercase; }
+.rodape { text-align: center; color: #77777f; font-size: .8rem; padding: 28px 16px 36px; background: #050505; }
+
+/* ---------- Celular ---------- */
+@media (max-width: 800px) {
+  .menu-botao { display: block; }
+  .navbar ul {
+    display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; padding: 12px 16px 20px;
+    background: rgba(5,5,5,.96); border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+  .navbar ul.aberto { display: flex; }
+  .navbar ul a { padding: 12px 16px; }
+  .sobre { grid-template-columns: 1fr; gap: 28px; }
+  .sobre-foto { max-width: 320px; position: static; }
+  .chamadas { grid-template-columns: 1fr; }
+  .numeros { gap: 24px; }
+  .faixas-ranking li { grid-template-columns: 36px 44px 1fr auto; gap: 10px; }
+  .mini-capa { width: 44px; height: 44px; }
+  .album-topo { grid-template-columns: 1fr; gap: 24px; }
+  .album-capa { max-width: 340px; }
+  .grade { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+}
+
+.erro { padding: 60px 16px 80px; text-align: center; }
+.erro .intro { margin: 0 auto 28px; }
+.erro .botao { border: 0; cursor: pointer; font: inherit; font-weight: 700; }
+
+/* =========================================================
+   Login, minha playlist e botão "+"
+   ========================================================= */
+.faixa-fim { display: flex; align-items: center; gap: 10px; }
+.adicionar {
+  width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font: inherit; font-weight: 700; line-height: 1;
+  background: transparent; color: var(--suave); border: 1px solid var(--borda); transition: background .15s, color .15s;
+}
+.adicionar:hover:not(:disabled) { background: var(--destaque); color: var(--sobre-destaque); border-color: var(--destaque); }
+.adicionar.ok { color: var(--destaque); border-color: var(--destaque); cursor: default; }
+.adicionar.erro { color: #ff8a8a; border-color: #ff8a8a; }
+.adicionar:disabled { cursor: default; }
+.dica a { color: var(--destaque); }
+
+.nav-sair, .navbar ul a.nav-entrar {
+  font: inherit; font-size: .9rem; cursor: pointer; padding: 8px 14px; border-radius: 999px;
+  background: transparent; color: #f2bd3d; border: 1px solid rgba(242,189,61,.4); text-decoration: none; display: inline-block;
+}
+.nav-sair:hover { background: rgba(242,189,61,.12); }
+
+.form-login { max-width: 420px; margin: 40px auto 80px; display: grid; gap: 16px; }
+.titulo-form { font-size: clamp(2.2rem, 8vw, 3.6rem); margin: 4px 0 0; }
+.form-login .intro { margin-bottom: 4px; }
+.form-login label, .form-edicao label { display: grid; gap: 6px; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--suave); }
+.form-login input, .form-edicao select, .form-edicao textarea {
+  font: inherit; font-size: 1rem; letter-spacing: normal; text-transform: none; color: var(--texto);
+  background: var(--painel); border: 1px solid var(--borda); border-radius: 10px; padding: 12px 14px; width: 100%;
+}
+.form-edicao select option { background: #1a1206; }
+.form-login input:focus, .form-edicao select:focus, .form-edicao textarea:focus { outline: 2px solid var(--destaque); outline-offset: 1px; }
+.form-login .botao, .acoes .botao { cursor: pointer; font: inherit; font-weight: 700; }
+.form-login .botao:not(.botao-vazado), .acoes .botao:not(.botao-vazado):not(.botao-perigo) { border: 0; }
+.form-login .botao:disabled { opacity: .6; cursor: default; }
+.link-botao { background: none; border: 0; color: var(--destaque); font: inherit; cursor: pointer; justify-self: center; text-decoration: underline; }
+.form-erro { color: #ffb3b3; background: rgba(255,80,80,.1); border: 1px solid rgba(255,80,80,.35); padding: 10px 14px; border-radius: 10px; }
+
+.vazio { padding: 24px 0 60px; }
+.playlist { list-style: none; display: grid; gap: 12px; padding-bottom: 60px; }
+.playlist-item {
+  display: grid; grid-template-columns: 64px 1fr auto; gap: 16px; align-items: start;
+  padding: 14px; border-radius: 14px; background: var(--painel); border: 1px solid var(--borda);
+}
+.playlist-item .mini-capa { width: 64px; height: 64px; }
+.playlist-meio { min-width: 0; display: grid; gap: 4px; }
+.estrelas { color: var(--destaque); letter-spacing: .1em; }
+.estrelas-vazias { color: var(--borda); }
+.comentario { color: #d6d6de; font-style: italic; overflow-wrap: anywhere; }
+.acoes { display: flex; gap: 8px; flex-wrap: wrap; }
+.botao-pequeno { padding: 8px 16px; font-size: .85rem; }
+.botao.botao-perigo { background: transparent; color: #ff9b9b; border: 1px solid rgba(255,120,120,.45); }
+.botao.botao-perigo:hover { background: rgba(255,120,120,.12); }
+.form-edicao { display: grid; gap: 10px; margin-top: 8px; }
+
+@media (max-width: 600px) {
+  .playlist-item { grid-template-columns: 48px 1fr; }
+  .playlist-item .mini-capa { width: 48px; height: 48px; }
+  .playlist-item > .acoes { grid-column: 1 / -1; }
+}
+
+/* Com os links novos (Minha playlist / Entrar), o menu vira "☰" já em telas médias */
+@media (max-width: 1000px) {
+  .menu-botao { display: block; }
+  .navbar ul {
+    display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; padding: 12px 16px 20px;
+    background: rgba(5,5,5,.96); border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+  .navbar ul.aberto { display: flex; }
+  .navbar ul a { padding: 12px 16px; }
+  .nav-sair, .navbar ul a.nav-entrar { margin-top: 8px; }
+}
