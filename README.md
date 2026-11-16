@@ -69,7 +69,6 @@ O texto "Sobre ela" e as turnês ficam em `lib/dados.js`. As fotos das turnês f
 ## Como rodar
 ```bash
 npm install
-cp .env.example .env.local   # e troque os valores
 npm run dev
 ```
 Abra http://localhost:3000
